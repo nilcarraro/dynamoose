@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.1">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
@@ -639,6 +639,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modelbatchput" title="model:batchput" class="md-nav__link">
+    model:batchput
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stages_6" title="Stages" class="md-nav__link">
+    Stages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-items-added-to-object_6" title="Additional Items Added to Object" class="md-nav__link">
+    Additional Items Added to Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelupdate" title="model:update" class="md-nav__link">
+    model:update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stages_7" title="Stages" class="md-nav__link">
+    Stages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-items-added-to-object_7" title="Additional Items Added to Object" class="md-nav__link">
+    Additional Items Added to Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -985,6 +1039,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#modelbatchput" title="model:batchput" class="md-nav__link">
+    model:batchput
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stages_6" title="Stages" class="md-nav__link">
+    Stages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-items-added-to-object_6" title="Additional Items Added to Object" class="md-nav__link">
+    Additional Items Added to Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelupdate" title="model:update" class="md-nav__link">
+    model:update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stages_7" title="Stages" class="md-nav__link">
+    Stages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-items-added-to-object_7" title="Additional Items Added to Object" class="md-nav__link">
+    Additional Items Added to Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1229,6 +1337,62 @@
     }
 }
 </code></pre>
+
+<h4 id="modelbatchput"><code>model:batchput</code></h4>
+<p>Dynamoose will emit this event when a batchPut is called on a model.</p>
+<h5 id="stages_6">Stages</h5>
+<ul>
+<li><code>batchput:called</code> - Dynamoose will emit this stage when a batchPut is about to start</li>
+<li><code>request:pre</code> - Dynamoose will emit this stage when a batchPut request is about to be made to DynamoDB</li>
+<li><code>request:post</code> - Dynamoose will emit this stage when a batchPut request response has been received from DynamoDB</li>
+</ul>
+<h5 id="additional-items-added-to-object_6">Additional Items Added to Object</h5>
+<pre><code>{
+    event: {
+        options: _____, // options passed to batchPut (object)
+        callback: _____, // callback passed to batchPut (function) (only valid on `batchput:called`)
+        items: _____, // items that will be/has been saved to DynamoDB (object) (model class instances on `batchput:called`, BatchWriteItem batched requests on `request:pre`, flattened BatchWriteItem responses on `request:post`)
+        error: _____ // the error object that was received from DynamoDB (object) (only valid on `request:post`)
+    },
+    action: {
+        updateCallback: _____, // function to update callback that is called (fn: function) (only valid on `batchput:called`)
+        updateOptions: _____, // function to update options object (reqObj: object) (only valid on `batchput:called`)
+        updateItems: _____, // function to update data that will be sent to DynamoDB (dataObj: object) (only valid on `request:pre`)
+        updateError: _____ // function to update error that was received from DynamoDB query before proceeding (errorObj: object) (only valid on `request:post`)
+    }
+}
+</code></pre>
+
+<h4 id="modelupdate"><code>model:update</code></h4>
+<p>Dynamoose will emit this event when an update is called on a model.</p>
+<h5 id="stages_7">Stages</h5>
+<ul>
+<li><code>update:called</code> - Dynamoose will emit this stage when an update is about to start</li>
+<li><code>request:pre</code> - Dynamoose will emit this stage when an update request is about to be made to DynamoDB</li>
+<li><code>request:post</code> - Dynamoose will emit this stage when an update request response has been received from DynamoDB</li>
+</ul>
+<h5 id="additional-items-added-to-object_7">Additional Items Added to Object</h5>
+<pre><code>{
+    event: {
+        options: _____, // options passed to update (object)
+        key: _____, // key of item that will be updated in DynamoDB (object)
+        callback: _____, // callback passed to update (function) (only valid on `update:called`)
+        expression: _____, // Update Expression that will be sent to DynamoDB (object) (only valid on `update:called`)
+        request: _____, // Update Request that will be sent to DynamoDB (object) (only valid on `request:pre`)
+        data: _____, // Update Request response that was received from DynamoDB (object) (only valid on `request:post`)
+        error: _____ // the error object that was received from DynamoDB (object) (only valid on `request:post`)
+    },
+    action: {
+        updateCallback: _____, // function to update callback that is called (fn: function) (only valid on `update:called`)
+        updateOptions: _____, // function to update options object (object) (only valid on `update:called`)
+        updateKey: _____, // function to update key of item that will be updated in DynamoDB (object) (only valid on `update:called`)
+        updateExpression: _____, // function to update Update Expression that will be sent to DynamoDB (object) (only valid on `update:called`)
+        updateRequest: _____, // function to update Update Request that will be sent to DynamoDB (object) (only valid on `request:pre`)
+        updateData: _____, // function to update Update Request response that was received from DynamoDB (object) (only valid on `request:post`)
+        updateError: _____ // function to update error that was received from DynamoDB query before proceeding (errorObj: object) (only valid on `request:post`)
+    }
+}
+</code></pre>
                 
                   
                 
@@ -1298,7 +1462,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
