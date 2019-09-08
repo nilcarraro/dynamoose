@@ -577,7 +577,7 @@
                 <p>Schemas are used to define DynamoDB table attributes and their constraints.</p>
 <h3 id="creating-a-new-schema">Creating a new Schema</h3>
 <p>Schemas are created using <code>new Schema(attrDefObj, options)</code>.</p>
-<p>The first argument (<code>attrDefObj</code>) is an object containing attribute definitions. Keys of this object correspond to attributes in the resulting DynamoDB table. The values of these keys define constraints on those attributes (as well as a few handy features...). See <a href="#attribute-definitions">Attribute Definitions</a> for a more thorough description.</p>
+<p>The first argument (<code>attrDefObj</code>) is an object containing attribute definitions. Keys of this object correspond to attributes in the resulting DynamoDB table. The values of these keys define constraints on those attributes (as well as a few handy features). See <a href="#attribute-definitions">Attribute Definitions</a> for a more thorough description.</p>
 <p>The second argument (<code>options</code>) defines options for the table that are beyond the scope of individual attributes. See <a href="#schema-options">Schema Options</a> for more.</p>
 <p>The following is an example of creating a new Schema:</p>
 <pre><code class="js">var Schema = dynamoose.Schema;
@@ -717,7 +717,7 @@ var dogSchema = new Schema({
 <li><em>throughput: number &#124; {read: number, write: number}</em> - Sets the throughput for the global secondary index.</li>
 </ul>
 <p><strong>default</strong>: function &#124; value</p>
-<p>Applies a default to the attribute's value when saving, if the values is null or undefined.</p>
+<p>Applies a default to the attribute's value when saving, if the value is null or undefined.</p>
 <p>If default is a function, the function is called with the current model instance, and the response is assigned to the attribute's value.</p>
 <p>If it is a value, the value is simply assigned.</p>
 <pre><code class="js">function(model) {
@@ -725,7 +725,7 @@ var dogSchema = new Schema({
 }
 </code></pre>
 
-<p>Your function may also be an async function with await statements in it, or return a promise. For example:</p>
+<p>Your function may also be an async function with <code>await</code> statements in it, or you may return a promise. For example:</p>
 <pre><code class="js">function(model) {
     return new Promise(resolve =&gt; {
         setTimeout(function() {
@@ -761,9 +761,9 @@ var dogSchema = new Schema({
 }
 </code></pre>
 
-<p>If it is a RegExp, it is compared using <code>RegExp.test(value)</code>.</p>
+<p>If it is a <code>RegExp</code>, it is compared using <code>RegExp.test(value)</code>.</p>
 <p>If it is a value, it is compared with <code>===</code>.</p>
-<p>If an object is passed in it must have a validator property that is a function. You can set the <code>isAsync</code> property to true, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
+<p>If an object is passed in, it must have a validator property that is a function. You can set the <code>isAsync</code> property to <code>true</code>, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
 <pre><code class="js">{
   isAsync: true, // default: false
   validator: function(v, model, cb) {
@@ -819,7 +819,7 @@ var dogSchema = new Schema({
 }
 </code></pre>
 
-<p>If an object is passed in it must have a toDynamo property that is a function. You can set the <code>isAsync</code> property to true, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
+<p>If an object is passed in it must have a <code>toDynamo</code> property that is a function. You can set the <code>isAsync</code> property to true, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
 <pre><code class="js">{
   isAsync: true, // default: false
   toDynamo: function(v, cb) {
@@ -832,7 +832,7 @@ var dogSchema = new Schema({
 
 <p><strong>fromDynamo</strong>: function | object</p>
 <p>Adds a getter function that will be used to transform the value directly returned from the DB. This skips all type management and parsing normally provided by <code>options.get</code>.</p>
-<p>Your function may also be an async function with await statements in it, or return a promise. For example:</p>
+<p>Your function may also be an async function with <code>await</code> statements in it, or you may return a promise. For example:</p>
 <pre><code class="js">function(val) {
     return new Promise(resolve =&gt; {
         setTimeout(function() {
@@ -842,7 +842,7 @@ var dogSchema = new Schema({
 }
 </code></pre>
 
-<p>If an object is passed in it must have a fromDynamo property that is a function. You can set the <code>isAsync</code> property to true, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
+<p>If an object is passed in it must have a <code>fromDynamo</code> property that is a function. You can set the <code>isAsync</code> property to <code>true</code>, to enable callback functionality. If you are using promises, <code>isAsync</code> is not required. For example:</p>
 <pre><code class="js">{
   isAsync: true, // default: false
   fromDynamo: function(v, cb) {
@@ -861,8 +861,8 @@ var dogSchema = new Schema({
 <p>Convert to uppercase when saving to DB.</p>
 <h3 id="options">Options</h3>
 <p><strong>throughput</strong>: number | string &#124; {read: number, write: number}</p>
-<p>Sets the throughput of the DynamoDB table on creation. The value can either be a number or an object with the keys <code>read</code> and <code>write</code> (for example: <code>{read: 5, write: 2}</code>). If it is a number, both read and write are configured to that number. If it is omitted, the read and write values will be set to 1. Throughput will only be respected on table creation, and will not update the throughput of an existing table.</p>
-<p>If this property is set to <code>"ON_DEMAND"</code> the table will be created using PAY_PER_REQUEST BillingMode.</p>
+<p>Sets the throughput of the DynamoDB table on creation. The value can either be a number or an object with the keys <code>read</code> and <code>write</code> (for example: <code>{read: 5, write: 2}</code>). If it is a number, both read and write are configured to that number. If it is omitted, the read and write values will be set to <code>1</code>. Throughput will only be respected on table creation, and will not update the throughput of an existing table.</p>
+<p>If this property is set to <code>"ON_DEMAND"</code> the table will be created using <code>PAY_PER_REQUEST</code> BillingMode.</p>
 <pre><code class="js">var schema = new Schema({...}, {
   throughput: 5
 });
@@ -889,7 +889,7 @@ var schema = new Schema({...}, {
 </code></pre>
 
 <p><strong>timestamps</strong>: boolean &#124; {createdAt: string, updatedAt: string}</p>
-<p>Defines that <em>schema</em> must contain fields to control creation and last update timestamps. If it is set to true, this fields will be createdAt for creation date and updatedAt for last update. for example:</p>
+<p>Defines that <em>schema</em> must contain fields to control creation and last update timestamps. If it is set to true, the fields <code>createdAt</code> for creation date and <code>updatedAt</code> for last update will be added to the instance of the model. For example:</p>
 <pre><code class="js">var schema = new Schema({...}, {
   throughput: 5,
   timestamps: true
@@ -979,9 +979,9 @@ var schema = new Schema({...}, {
 
 <h3 id="methods">Methods</h3>
 <p>You can add custom methods to your Schema. Model methods can be accessed via <code>this.model(modelName)</code>.</p>
-<pre><code class="js">var Schema = dynamoose.Schema;
+<pre><code class="js">const Schema = dynamoose.Schema;
 
-var dogSchema = new Schema({
+const dogSchema = new Schema({
   ownerId: {
     type: Number,
     validate: function(v) { return v &gt; 0; },
@@ -1006,17 +1006,17 @@ dogSchema.method('becomeFriends', function (otherDog) {
   this.model('Dog').batchPut([this, otherDog]);
 });
 
-var Dog = dynamoose.model('Dog', dogSchema);
-var dog1 = new Dog({ownerId: 137, name: 'Snuffles'});
-var dog2 = new Dog({ownerId: 138, name: 'Bill'});
+const Dog = dynamoose.model('Dog', dogSchema);
+const dog1 = new Dog({ownerId: 137, name: 'Snuffles'});
+const dog2 = new Dog({ownerId: 138, name: 'Bill'});
 dog1.becomeFriends(dog2);
 </code></pre>
 
 <h4 id="static-methods">Static Methods</h4>
-<p>Can be accessed from the compiled Schema, similar to how <code>scan()</code> and <code>query()</code> are called.
+<p>Can be accessed from the compiled <code>Schema</code>, similar to how <code>scan()</code> and <code>query()</code> are called.
 <code>this</code> will refer to the compiled schema within the definition of the function.</p>
 <pre><code class="js">// Construction:
-var ModelSchema = new Schema({...})
+const ModelSchema = new Schema({...})
 
 ModelSchema.statics.getAll = async function (cb) {
   let results = await this.scan().exec();
